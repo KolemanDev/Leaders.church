@@ -11,7 +11,6 @@ const { RNCustomCode } = NativeModules;
 
 import { initialize } from "@blocklienterprise/blockli";
 import config from "@src/build_config.json";
-import "./lessonThumbnail.js"; // Import the lessonThumbnail.js script
 
 export const applyCustomCode = async (externalCodeSetup) => {
   const blockli_config = {
@@ -32,8 +31,3 @@ export const applyCustomCode = async (externalCodeSetup) => {
 
 
 };
-
-
-
-
-
