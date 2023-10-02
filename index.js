@@ -1,9 +1,17 @@
 import React from "react";
 import { NativeModules } from "react-native";
+import { View } from 'react-native';
+import { Text } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
+import WebViewWithMore from "@src/components/WebViewWithMore";
+
+
+
 const { RNCustomCode } = NativeModules;
 
 import { initialize } from "@blocklienterprise/blockli";
 import config from "@src/build_config.json";
+import "./lessonThumbnail.js"; // Import the lessonThumbnail.js script
 
 export const applyCustomCode = async (externalCodeSetup) => {
   const blockli_config = {
@@ -15,5 +23,17 @@ export const applyCustomCode = async (externalCodeSetup) => {
     // NOTE: If you have a staging site, please use a different Git branch for your test app and COPY this entire code to the test branch and enter the staging site domain. 
   };
 
-  await initialize(blockli_config);
+  // await initialize(blockli_config);
+
+  // Hide video series description
+  externalCodeSetup.courseSingleApi.setIsCourseDescriptionHidden((course) => {
+    return true;
+  });
+
+
 };
+
+
+
+
+
