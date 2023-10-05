@@ -1,36 +1,44 @@
-// Import necessary modules
-import React, { useEffect } from 'react';
-import { View } from 'react-native';
-console.log("123123");
-// Define a custom event
-const EVENT_LEARNDASH_COURSE_BEFORE = 'learndash-course-before';
+import React, { useEffect, useState } from "react";
+import { View, Text } from "react-native";
+import axios from "axios";
+import { connect } from "react-redux";
+import { getApi } from "@src/services";
 
-// Define your functional component
-const LessonThumbnail = () => {
+const lessonThumbnailData = (props) => {
+  const [apiResponse, setApiResponse] = useState({});
+
   useEffect(() => {
-    // Listen for the custom 'learndash-course-before' event
-    const handleCourseBeforeEvent = (event) => {
-      // Access the lesson information from the event object
-      const lessonInfo = event.detail;
-    
-      // Log the current lesson to the console
-      console.log('Current Lesson:', lessonInfo);
-    };
-
-    // Add an event listener when the component mounts
-    document.addEventListener(EVENT_LEARNDASH_COURSE_BEFORE, handleCourseBeforeEvent);
-
-    // Remove the event listener when the component unmounts (cleanup)
-    return () => {
-      document.removeEventListener(EVENT_LEARNDASH_COURSE_BEFORE, handleCourseBeforeEvent);
-    };
+    const api = getApi(props.config);
+    api.customRequest(
+        "/wp-json/buddyboss-app/learndash/v1/lessons/14925",
+        "get", // HTTP method should be lowercase
+      {}, // JSON, FormData, or any other payload
+      null, // Validation function or null
+      {}, // Request headers
+      false // Use the suffix, so set to false
+    )
+      .then((response) => {
+        setApiResponse(response.data);
+        console.log(response.data); // Move inside the .then block
+        console.log("oogly boogly");
+      })
+      .catch((error) => {
+        console.log("Error fetching data:", error);
+      });
   }, []);
 
   return (
-    <View>
-      {/* Your component's content here */}
+    <View
+      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+    >
+      <Text>{JSON.stringify(apiResponse)}</Text>
     </View>
   );
 };
 
-export default LessonThumbnail;
+const mapStateToProps = (state) => ({
+  config: state.config,
+  accessToken: state.auth.token,
+});
+
+export default connect(mapStateToProps)(lessonThumbnailData);
