@@ -16,5 +16,8 @@
   "peerDependencies": {
     "react": "^17.0.2",
     "react-native": "^0.67.4"
+  },
+  "dependencies": {
+    "buddyboss-bundler": "^1.3.1"
   }
 }

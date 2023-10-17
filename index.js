@@ -15,14 +15,13 @@ export const applyCustomCode = async (externalCodeSetup) => {
     website: "https://leaders.church", // Enter your app domain here with NO trailing slash. 
     // NOTE: If you have a staging site, please use a different Git branch for your test app and COPY this entire code to the test branch and enter the staging site domain. 
   };
-  
+    await initialize(blockli_config);
+
 
     // Hide video series description
   externalCodeSetup.courseSingleApi.setIsCourseDescriptionHidden((course) => {
     return true;
   });
-  // lessonThumbnailData(externalCodeSetup);
 
-  await initialize(blockli_config);
 };
 
