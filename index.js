@@ -6,6 +6,12 @@ const { RNCustomCode } = NativeModules;
 import { initialize } from "@blocklienterprise/blockli";
 import config from "@src/build_config.json";
 
+
+    // Hide video series description
+    externalCodeSetup.courseSingleApi.setIsCourseDescriptionHidden((course) => {
+      return true;
+    });
+
 export const applyCustomCode = async (externalCodeSetup) => {
   const blockli_config = {
     license: "6ZVSLCJ6C5C5XIQ", // Enter your 15 digit Blockli App Kit license key here. See your account dashboard at https://blockli.dev/dashboard
@@ -18,10 +24,7 @@ export const applyCustomCode = async (externalCodeSetup) => {
     await initialize(blockli_config);
 
 
-    // Hide video series description
-  externalCodeSetup.courseSingleApi.setIsCourseDescriptionHidden((course) => {
-    return true;
-  });
+
 
 };
 
