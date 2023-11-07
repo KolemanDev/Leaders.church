@@ -17,7 +17,7 @@ export const applyCustomCode = async (externalCodeSetup) => {
 
     externalCodeSetup.navigationApi.replaceScreenComponent("SignupScreen", () => (
       <WebView
-      source={{ uri: 'https://en225.infusionsoft.app/app/form/create-beta-app-account' }}
+      source={{ uri: 'https://en225.infusionsoft.app/app/form/create-beta-app-account-app' }}
     />
   ));
 	
